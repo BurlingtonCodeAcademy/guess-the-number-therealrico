@@ -20,15 +20,18 @@ async function start() {
   console.log('You entered: ' + secretNumber);
   guess = Math.floor((max - min) / 2);
   let answer = await ask("Is this your number? Please answer (Y)es, (H)igher, (L)ower")
-  if (answer === 'Y') {
-    console.log('Correct!') 
-  } else if (answer === 'H') {
-    console.log("Ok, I'll guess higher...")
-  } else if (answer === 'L') {
-    console.log("Ok, I'll guess lower...")
-  } else {
-    console.log("I don't understand that, please enter again.")
+  while (answer != 'Y'){
+    if (answer === 'Y') {
+      console.log('Correct!') 
+    } else if (answer === 'H') {
+      console.log("Ok, I'll guess higher...")
+    } else if (answer === 'L') {
+      console.log("Ok, I'll guess lower...")
+    } else {
+      console.log("I don't understand that, please enter again.")
+    }
   }
+  
   // Now try and complete the program.
   process.exit();
 }
