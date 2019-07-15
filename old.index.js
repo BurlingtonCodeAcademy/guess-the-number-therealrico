@@ -7,39 +7,32 @@ function ask(questionText) {
   });
 }
 
-
+start();
 
 let min = 1;
 let max = 100;
-
-start();
+let guess;
+let secretNumber;
 
 async function start() {
-  console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.\nThink of a number between 1 and 100 and I will guess it in as few guess as possible")
-  let guess = Math.floor((max + min) / 2);
+  console.log("Let's play a game where you (human) make up a number and I (computer) try to guess it.")
+  secretNumber = await ask("What is your secret number?\nI won't peek, I promise...\n");
+  console.log('You entered: ' + secretNumber);
+  guess = Math.floor((max - min) / 2);
   let answer = await ask("Is this your number? " + guess + " Please answer (Y)es, (H)igher, (L)ower")
-   while (answer.toUpperCase() != 'Y') {
-    if (answer.toUpperCase() === 'H') {
-      min = guess;
-      console.log(min + ' This is your new low number.')
-      guess = Math.floor((max + min) / 2);
+   while (answer != 'Y') {
+    if (answer === 'Y') {
+      console.log('Correct!') 
+    } else if (answer === 'H') {
       console.log("Ok, I'll guess higher...")
-      answer = await ask("Is this your number? " + guess + " Please answer (Y)es, (H)igher, (L)ower")
-    } else if (answer.toUpperCase() === 'L') {
-      max = guess;
-      console.log(max + ' is your new highest number.')
-      guess = Math.floor((max + min) / 2);
+    } else if (answer === 'L') {
       console.log("Ok, I'll guess lower...")
-      answer = await ask("Is this your number? " + guess + " Please answer (Y)es, (H)igher, (L)ower")
     } else {
       console.log("I don't understand that, please enter again.")
-      answer = await ask("Is this your number? " + guess + " Please answer (Y)es, (H)igher, (L)ower")
     }
-    
   }
   
   // Now try and complete the program.
- console.log('WOW, you da man, you should go to Vegas and put it all on the roulette table.') 
   process.exit();
 }
 
